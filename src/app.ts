@@ -2,7 +2,7 @@ import { join } from 'path'
 import { createBot, createProvider, createFlow, addKeyword, utils } from '@builderbot/bot'
 import { MemoryDB as Database } from '@builderbot/bot'
 import { BaileysProvider as Provider } from '@builderbot/provider-baileys'
-import puppeteer  from 'puppeteer'
+import puppeteer from 'puppeteer'
 const PORT = process.env.PORT ?? 3008
 
 const discordFlow = addKeyword<Provider, Database>('doc').addAnswer(
@@ -38,7 +38,16 @@ const welcomeFlow = addKeyword<Provider, Database>(['hi', 'hello', 'hola'])
 const pruebaPlaywright = addKeyword<Provider, Database>('toto')
     .addAction(async (_, { flowDynamic }) => {
 
-        const browser: any = await puppeteer.launch()
+        const browser: any = await puppeteer.launch({
+            headless: true,
+            args: [
+                "--disabled-setuid-sandbox",
+                "--no-sandbox",
+                "--single-process",
+                "--no-zygote"
+            ],
+            executablePath: "/usr/bin/chromium-browser",
+        })
         // const context = (await browser).newContext
         const page = await browser.newPage()
         await page.goto('https://google.com.pe')

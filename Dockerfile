@@ -5,7 +5,7 @@ WORKDIR /app
 
 RUN corepack enable && corepack prepare pnpm@latest --activate
 ENV PNPM_HOME=/usr/local/bin
-
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 COPY . .
 
 COPY package*.json *-lock.yaml ./
@@ -26,7 +26,7 @@ WORKDIR /app
 ARG PORT
 ENV PORT $PORT
 EXPOSE $PORT
-
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 COPY --from=builder /app/assets ./assets
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/*.json /app/*-lock.yaml ./
