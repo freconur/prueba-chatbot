@@ -50,6 +50,10 @@ const pruebaPlaywright = addKeyword<Provider, Database>('toto')
             // fullpage:true
         })
         await browser.close()
+        await flowDynamic([{
+            body: `Look at this`,
+            media: join(`prueba.png`)
+        }])
     })
 
 const registerFlow = addKeyword<Provider, Database>(utils.setEvent('REGISTER_FLOW'))
