@@ -39,14 +39,8 @@ const pruebaPlaywright = addKeyword<Provider, Database>('toto')
     .addAction(async (_, { flowDynamic }) => {
 
         const browser: any = await puppeteer.launch({
-            headless: true,
-            args: [
-                "--disabled-setuid-sandbox",
-                "--no-sandbox",
-                "--single-process",
-                "--no-zygote"
-            ],
-            executablePath: "/usr/bin/chromium-browser",
+            executablePath: '/usr/bin/chromium-browser',
+            args: ['--no-sandbox', '--disable-dev-shm-usage'],
         })
         // const context = (await browser).newContext
         const page = await browser.newPage()
