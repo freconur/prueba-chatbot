@@ -11,13 +11,14 @@ COPY . .
 COPY package*.json *-lock.yaml ./
 
 RUN apk add --no-cache --virtual .gyp \
-        python3 \
-        make \
-        g++ \
+    chromium \
+    python3 \
+    make \
+    g++ \
     && apk add --no-cache git \
     && pnpm install && pnpm run build \
     && apk del .gyp
-
+RUN npm install puppeteer@22.8.0
 FROM node:21-alpine3.18 as deploy
 
 WORKDIR /app
@@ -36,5 +37,5 @@ ENV PNPM_HOME=/usr/local/bin
 RUN npm cache clean --force && pnpm install --production --ignore-scripts \
     && addgroup -g 1001 -S nodejs && adduser -S -u 1001 nodejs \
     && rm -rf $PNPM_HOME/.npm $PNPM_HOME/.node-gyp
-
+RUN npm install puppeteer@22.8.0
 CMD ["npm", "start"]

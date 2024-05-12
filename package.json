@@ -14,7 +14,7 @@
   "dependencies": {
     "@builderbot/bot": "1.1.5",
     "@builderbot/provider-baileys": "1.1.5",
-    "playwright": "^1.44.0"
+    "puppeteer": "^22.8.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.30",
