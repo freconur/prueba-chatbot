@@ -39,7 +39,7 @@ const pruebaPlaywright = addKeyword<Provider, Database>('toto')
     .addAction(async (_, { flowDynamic }) => {
 
         const browser: any = await puppeteer.launch({
-            executablePath: '/usr/local/bin/chromium-browser',
+            executablePath: '/usr/bin/chromium-browser',
             args: ['--no-sandbox', '--disable-dev-shm-usage'],
         })
         // const context = (await browser).newContext
